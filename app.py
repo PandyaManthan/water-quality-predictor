@@ -6,6 +6,7 @@ import pickle
 import streamlit as st
 import os
 import requests
+import gdown
 
 # Function to download files from Google Drive
 def download_from_google_drive(file_id, filename):
@@ -13,10 +14,8 @@ def download_from_google_drive(file_id, filename):
     if os.path.exists(filename):
         return
     
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
-    response = requests.get(url)
-    with open(filename, 'wb') as f:
-        f.write(response.content)
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, filename, quiet=False)
 
 # Download model files from Google Drive
 # Replace these FILE IDs with your actual Google Drive file IDs
